@@ -12,7 +12,7 @@
                         @csrf
 
                         <input type="hidden" name="token" value="{{ $token }}">
-                        <!--
+                        
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
@@ -26,7 +26,7 @@
                                 @enderror
                             </div>
                         </div>
-                        -->
+                        
 
                         <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
