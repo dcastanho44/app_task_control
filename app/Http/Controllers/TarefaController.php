@@ -17,14 +17,17 @@ class TarefaController extends Controller
      */
     public function index()
     {
+        $user_id = auth()->user()->id;
+        $tarefas = Tarefa::where('user_id', $user_id)->get();
+        return view('tarefa.index', ['tarefas' => $tarefas]);
         
-        $id = Auth::user()->id;
+        /*$id = Auth::user()->id;
         $name = Auth::user()->name;
         $email = Auth::user()->email;
         return "ID: $id | Nome: $name | Email: $email";
         
         
-        /*if (auth()->check()){
+        if (auth()->check()){
             $id = auth()->user()->id;
             $name = auth()->user()->name;
             $email = auth()->user()->email;
@@ -33,7 +36,7 @@ class TarefaController extends Controller
             return 'Você não está logado no sistema';
         }
         return 'Cheguei até aqui';*/
-
+        
     }
 
     /**
@@ -54,10 +57,10 @@ class TarefaController extends Controller
      */
     public function store(Request $request)
     {   
-        $dados = $request->all();
+        $dados = $request->all('tarefa', 'data_limite_conclusao');
         $dados['user_id'] = auth()->user()->id;
         
-        $tarefa = Tarefa::create($request->all());
+        $tarefa = Tarefa::create($dados);
         
         $destinatario = auth()->user()->email;
         Mail::to($destinatario)->send(new NovaTarefaMail($tarefa));
