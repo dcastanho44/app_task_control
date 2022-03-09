@@ -21,11 +21,23 @@
                                 <tr>
                                     <th scope="row">{{ $t['id'] }}</th>
                                     <td>{{ $t['tarefa'] }}</td>
-                                    <td>{{ date('d/m/Y', strtotime($t['data_limite_conclusao'])) }}</td>
+                                    <td>{{ date('d/m/Y', strtotime($t['data_limite_conclusao'])) }}
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+                            <li class="page-item"><a class="page-link" href="{{ $tarefas->previousPageUrl() }}"><</a></li>
+                            @for($i = 1; $i <= $tarefas->lastPage(); $i++)
+                                <li class="page-item {{ $tarefas->currentPage() == $i ? 'active' : ''}}">
+                                <a class="page-link" href="{{ $tarefas->url($i) }}">{{ $i }}</a>
+                                </li>
+                            @endfor
+                            <li class="page-item"><a class="page-link" href="{{ $tarefas->nextPageUrl() }}">></a></li>
+                        </ul>
+                    </nav>
                 </div>
             </div>
         </div>
