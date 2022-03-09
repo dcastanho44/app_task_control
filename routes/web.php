@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Mail;
 */
 
 Route::get('/', function () {
-    return view('bem-vindo');
+    return view('welcome');
 });
 
 Auth::routes(['verify' => true]);
